@@ -9,7 +9,7 @@ Currently, two official plugins are available:
 
 # Demo
 
-![Demo](/src/assets/video/demo.mp4)
+![Demo](/src/assets/video/demo.gif)
 <br />
 <br />
 
