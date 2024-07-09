@@ -6,8 +6,9 @@ const TitleCards = ({ title, category }) => {
   const [apiData, setApiData] = useState([]);
   const cradsRef = useRef();
 
-  const API_KEY = "REACT_APP_API_KEY";
-  const ACCESS_TOKEN = "REACT_APP_ACCESS_TOKEN";
+  const API_KEY = "edc29809a626581e13c05517b1dbf1fc";
+  const ACCESS_TOKEN =
+    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGMyOTgwOWE2MjY1ODFlMTNjMDU1MTdiMWRiZjFmYyIsIm5iZiI6MTcyMDUyNDAwMS44NzQyMTcsInN1YiI6IjY2ODkwMjM5NTEyMTI3ZTI2MjVlMGU0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xoENOfHsojIVmOSNH2kMmtlOmzG7Q_DhGBP2TBEMsOo";
 
   const options = {
     method: "GET",
