@@ -1,54 +1,63 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./TitleCards.css";
-import cards_data from "../../assets/cards/Cards_data";
 import { Link } from "react-router-dom";
 
 const TitleCards = ({ title, category }) => {
-    const [apiData, setApiData] = useState([]);
-    const cradsRef = useRef();
+  const [apiData, setApiData] = useState([]);
+  const cradsRef = useRef();
 
-    const options = {
-        method: "GET",
-        headers: {
-            accept: "application/json",
-            Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYTBjMDIzMDg5ZWMyODY4MmQ5ZGExMDM1YTJiNjc4NiIsInN1YiI6IjY2NGFhYzc1NjA0MmRiODBhOTJjOGNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yhUUTvJs625bU_jOE73YW60UOJx6YPjG7bVb6Wj8ZZE",
-        },
-    };
+  const API_KEY = "REACT_APP_API_KEY";
+  const ACCESS_TOKEN = "REACT_APP_ACCESS_TOKEN";
 
-    const handleWheel = (event) => {
-        event.preventDefault();
-        cradsRef.current.scrollLeft += event.deltaY;
-    };
-    useEffect(() => {
-        fetch(
-            `https://api.themoviedb.org/3/movie/${category ? category : "now_playing"}?language=en-US&page=1`,
-            options
-        )
-            .then((response) => response.json())
-            .then((response) => setApiData(response.results))
-            .catch((err) => console.error(err));
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+  };
 
-        cradsRef.current.addEventListener("wheel", handleWheel);
-    }, []);
-    return (
-        <div className="title-cards">
-            <h2>{title ? title : "Popular on Netflix"}</h2>
-            <div className="card-list" ref={cradsRef}>
-                {apiData.map((card, index) => {
-                    return (
-                        <Link to={`/player/${card.id}`} className="card" key={index}>
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500` + card.backdrop_path}
-                                alt=""
-                            />
-                            <p>{card.original_title}</p>
-                        </Link>
-                    );
-                })}
-            </div>
-        </div>
-    );
+  const handleWheel = (event) => {
+    event.preventDefault();
+    cradsRef.current.scrollLeft += event.deltaY;
+  };
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${
+        category ? category : "now_playing"
+      }?api_key=${API_KEY}&language=en-US&page=1`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.results) {
+          setApiData(response.results);
+        } else {
+          console.error("Error fetching data:", response);
+        }
+      })
+      .catch((err) => console.error(err));
+
+    cradsRef.current.addEventListener("wheel", handleWheel);
+  }, [category]);
+
+  return (
+    <div className="title-cards">
+      <h2>{title ? title : "Popular on Netflix"}</h2>
+      <div className="card-list" ref={cradsRef}>
+        {apiData.map((card, index) => (
+          <Link to={`/player/${card.id}`} className="card" key={index}>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${card.backdrop_path}`}
+              alt=""
+            />
+            <p>{card.original_title}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default TitleCards;
