@@ -13,7 +13,9 @@ Currently, two official plugins are available:
 
 ## Firebase Configuration
 
-- Email: `nguoidung@gmail.com`
+**Email:*** ```bash
+nguoidung@gmail.com
+```
 - Password: `12345678`
 
 ## Running the Project
