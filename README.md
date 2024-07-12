@@ -13,11 +13,11 @@ Currently, two official plugins are available:
 
 ## Firebase Configuration
 
-**Email:*** 
+**Email:**
 ```bash
 nguoidung@gmail.com
 ```
-**Password: **
+**Password:**
 ```bash 
 12345678
 ```
