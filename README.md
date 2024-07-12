@@ -13,12 +13,17 @@ Currently, two official plugins are available:
 
 ## Firebase Configuration
 
-**Email:*** ```bash
+**Email:*** 
+```bash
 nguoidung@gmail.com
 ```
-- Password: `12345678`
-
+**Password: **
+```bash 
+12345678
+```
 ## Running the Project
 
-`npm run dev`
+```bash 
+npm run dev
+```
 
